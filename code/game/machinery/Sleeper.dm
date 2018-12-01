@@ -146,6 +146,50 @@
 	..()
 	go_out()
 
+
+/branch
+	var/is_cut = FALSE
+
+/tree
+	var/branch/branch1 = 1
+	var/branch/branch2 = 2
+	var/branch/branch3 = 3
+
+/human
+	var/tree/T
+	
+/human/click(var/weapon/W)
+	if(istype(W,/weapon/axe))
+		W.cutbranch()
+
+/weapon/axe
+
+/weapon/axe/proc/cutbranch(var/B)
+	B.is_cut = TRUE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /obj/machinery/sleeper/emp_act(var/severity)
 	if(filtering)
 		toggle_filter()

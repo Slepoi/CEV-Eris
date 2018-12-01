@@ -288,3 +288,26 @@
 		spawn(0)
 			qdel(src)
 		return
+/obj/structure/bed/MouseDrop(over_object, src_location, over_location)
+	if(!M)
+		return
+	if(occupant)
+		user << SPAN_WARNING("\The [src] is already occupied.")
+		return
+
+	if(M == user)
+		visible_message("\The [user] starts climbing into \the [src].")
+	else
+		visible_message("\The [user] starts putting [M] into \the [src].")
+	if(do_after(user, 20, src))
+		if(occupant)
+			user << SPAN_WARNING("\The [src] is already occupied.")
+			return
+		M.stop_pulling()
+		if(M.client)
+			M.client.perspective = EYE_PERSPECTIVE
+			M.client.eye = src
+		M.loc = src
+		update_use_power(2)
+		occupant = M
+		update_icon()
